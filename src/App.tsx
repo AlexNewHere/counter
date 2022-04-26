@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {ButtonNew} from './ButtonNew/ButtonNew';
+import WinCount from './winCount';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export const App = () => {
+
+    let maxCount: number = 5;
+    let startCount: number = 0;
+
+    let [count, setCount] = useState<number>(startCount);
+
+    const increment = () => {
+        if (count<=maxCount) setCount(count+1);
+    }
+
+    const reset = () => {
+        setCount(startCount);
+    }
+
+    const offInc: boolean = (count === maxCount)
+    const onReset: boolean = (count === startCount)
+
+    return (
+        <div className="App">
+
+            <WinCount winCount={count} offInc={offInc} />
+
+            <div className="bgButton">
+
+                <ButtonNew onClick={increment} onOff={offInc} nameButton={'inc'}/>
+
+                <ButtonNew onClick={reset} onOff={onReset} nameButton={'reset'}/>
+
+            </div>
+        </div>
+    );
 }
 
-export default App;
+
