@@ -9,13 +9,17 @@ type ButtonNewType = {
 
 export const ButtonNew: React.FC<ButtonNewType> = ({onClick, nameButton, onOff}) => {
 
-    return (<button
-            className="button"
+    const btnHover: string = !onOff ? 'button' : 'buttonNo ';
+
+    return (
+        <div>
+        <button
+            className={btnHover}
             onClick={onClick}
             disabled={onOff}
         >
             {nameButton}
-        </button>
+        </button> </div>
     );
 };
 
