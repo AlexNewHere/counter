@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {ButtonNew} from './ButtonNew/ButtonNew';
 import {WinCount} from './winCount';
@@ -6,36 +6,41 @@ import {InputValue} from './SetValue/InputValue';
 
 export const App = () => {
 
-
-    let [startCount, setStartCount] = useState<string>('0');
-    let [maxCount, setMaxCount] = useState<string>('5');
-
-    const startValue = (value: string) => {
-        setStartCount(value);
-    }
-    const maxValue = (value: string) => {
-        setMaxCount(value);
-
-    }
+    let [startCount, setStartCount] = useState<string>(localStorage.getItem('startCount') || '0');
+    let [maxCount, setMaxCount] = useState<string>(localStorage.getItem('maxCount') || '5');
 
     let [count, setCount] = useState<string>(startCount);
     let [valueMax, setValueMax] = useState<string>(maxCount);
 
+    let [disableMax, setDisableMax] = useState<boolean>(true);
+
+    useEffect(() => {
+        localStorage.setItem('startCount', startCount);
+        localStorage.setItem('maxCount', maxCount);
+    }, [startCount, maxCount]);
+
+    const startValue = (value: string) => {
+        setStartCount(value)
+    }
+
+    const maxValue = (value: string) => {
+        setMaxCount(value);
+    }
+
     const setUpCount = () => {
         setCount(startCount);
         setValueMax(maxCount);
-        setDisableMax(true);
+        setDisableMax(true)
     }
 
     const increment = () => {
-        (count <= maxCount) && setCount((+count + 1).toString());
+        (Number(count) <= Number(maxCount)) && setCount((Number(count) + 1).toString());
     }
 
     const reset = () => {
         setCount(startCount);
     }
 
-    let [disableMax, setDisableMax] = useState<boolean>(true);
     const inputMin = (trust: boolean) => {
         setDisableMax(!trust)
     }
@@ -43,21 +48,28 @@ export const App = () => {
         setDisableMax(!trust)
     }
 
-    const offInc: boolean = (count === valueMax) || !disableMax
-    const onReset: boolean = (count === startCount)
+    let tryCount = 'enter values and press set';
+    let placeCss: string = 'number_enter'
+    let errorCss: string = 'input'
+    let offInc: boolean = (count === valueMax) || !disableMax
+    let onReset: boolean = (count === startCount) || !disableMax
 
-    const ckeckWin: string = disableMax? count : "enter value";
-
+    if ((Number(startCount) < 0) || (Number(maxCount) <= Number(startCount))) {
+        tryCount = 'Incorrect values!!!';
+        offInc = true;
+        onReset = true;
+        placeCss = 'number_enter_error'
+        errorCss = 'input place_error'
+        disableMax = true;
+    }
 
     return (
 
         <div className="app">
             <div className="counter">
-
-                <WinCount
-                    winCount={ckeckWin}
-                    offInc={offInc}
-                />
+                {(disableMax && !offInc) ?
+                    <WinCount winCount={count} offInc={offInc}/> :
+                    <div className={placeCss}>{tryCount}</div>}
 
                 <div className="bgButton">
                     <ButtonNew
@@ -82,6 +94,7 @@ export const App = () => {
                         setValue={maxValue}
                         value={maxCount}
                         inputFocus={inputMax}
+                        errorCss={errorCss}
                     />
 
                     <InputValue
@@ -89,6 +102,7 @@ export const App = () => {
                         setValue={startValue}
                         value={startCount}
                         inputFocus={inputMin}
+                        errorCss={errorCss}
                     />
 
                 </div>

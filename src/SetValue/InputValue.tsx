@@ -1,31 +1,28 @@
 import React  from 'react';
 import './InputCss.css';
 
-
 type WinCountType = {
     nameValue: string;
     setValue: (value: string) => void;
     inputFocus: (trust: boolean) => void;
     value: string
+    errorCss: any
 };
 
-export const InputValue: React.FC<WinCountType> = ({nameValue, setValue, inputFocus, value}) => {
-
-    // const maxCountStyle: string = (offInc ? 'red number' : 'number')
-
-
+export const InputValue: React.FC<WinCountType> = (
+    {nameValue, setValue, inputFocus,   errorCss, value}) =>
+{
 
     return (
-        <div className="place">
-            <span>{nameValue}</span>
+        <div className='place'>
+            <span className='span'>{nameValue}</span>
             <input
+                className={errorCss}
                 type="number"
                 value={value}
                 onChange={(e)=>setValue(e.currentTarget.value)}
-                onFocus={e => inputFocus(e.isTrusted)}
-                disabled={false}
+                onFocus={(e) => inputFocus(e.isTrusted)}
             />
-
         </div>
     );
 };
