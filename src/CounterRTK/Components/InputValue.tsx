@@ -22,6 +22,7 @@ export const InputValue: React.FC<WinCountType> = (
                 value={value}
                 onChange={(e: ChangeEvent<HTMLInputElement>)=>setValue(Number(e.currentTarget.value))}
                 onFocus={(e: ChangeEvent<HTMLInputElement>) => inputFocus(e.isTrusted)}
+
             />
         </div>
     );

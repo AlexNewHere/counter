@@ -1,6 +1,6 @@
 import React from 'react';
 import {Counter} from "./Counter/Counter";
-import CounterRtk from "./CounterRTK/CounterRTK";
+import CounterReduxToolKit from "./CounterRTK/CounterRTK";
 
 const App = () => {
     return (
@@ -8,7 +8,7 @@ const App = () => {
             <div className='appCount'>Counter v1 'on a crutch'</div>
             <Counter/>
             <div className='appCount'>Counter v2 'on ReduxTK'</div>
-            <CounterRtk/>
+            <CounterReduxToolKit/>
         </div>
     );
 };

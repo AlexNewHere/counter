@@ -1,7 +1,7 @@
 import React from 'react';
 
 type WinCountType = {
-    winCount: string;
+    winCount: number;
     offInc: boolean
 };
 

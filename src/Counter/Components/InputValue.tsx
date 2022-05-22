@@ -3,9 +3,9 @@ import './InputCss.css';
 
 type WinCountType = {
     nameValue: string;
-    setValue: (value: string) => void;
+    setValue: (value: number) => void;
     inputFocus: (trust: boolean) => void;
-    value: string
+    value: number
     errorCss: any
 };
 
@@ -20,7 +20,7 @@ export const InputValue: React.FC<WinCountType> = (
                 className={errorCss}
                 type="number"
                 value={value}
-                onChange={(e)=>setValue(e.currentTarget.value)}
+                onChange={(e)=>setValue(Number(e.currentTarget.value))}
                 onFocus={(e) => inputFocus(e.isTrusted)}
             />
         </div>

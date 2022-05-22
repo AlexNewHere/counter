@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import '../App.css';
 import {ButtonNew} from './Components/ButtonNew';
 import {WinCount} from './Components/winCount';
@@ -6,25 +6,34 @@ import {InputValue} from './Components/InputValue';
 
 export const Counter = () => {
 
-    let [startCount, setStartCount] = useState<string>(localStorage.getItem('startCount') || '0');
-    let [maxCount, setMaxCount] = useState<string>(localStorage.getItem('maxCount') || '5');
+    const loadState = (title: string): number => {
+        const serializedState = localStorage.getItem(title);
+        if (serializedState === null)
+        {
+            return 0;
+        }
+        return JSON.parse(serializedState);
+    }
 
-    let [count, setCount] = useState<string>(startCount);
-    let [valueMax, setValueMax] = useState<string>(maxCount);
+    let [startCount, setStartCount] = useState<number>(loadState('startCount'));
+    let [maxCount, setMaxCount] = useState<number>(loadState('maxCount'));
+
+    let [count, setCount] = useState<number>(startCount);
+    let [valueMax, setValueMax] = useState<number>(maxCount);
 
     let [disableMax, setDisableMax] = useState<boolean>(true);
 
     useEffect(() => {
-        localStorage.setItem('startCount', startCount);
-        localStorage.setItem('maxCount', maxCount);
+        localStorage.setItem('startCount', JSON.stringify(startCount));
+        localStorage.setItem('maxCount', JSON.stringify(maxCount));
     }, [startCount, maxCount]);
 
-    const startValue = (value: string) => {
-        setStartCount(value)
+    const startValue = (value: number) => {
+        Number.isInteger(value) && setStartCount(value)
     }
 
-    const maxValue = (value: string) => {
-        setMaxCount(value);
+    const maxValue = (value: number) => {
+        Number.isInteger(value) && setMaxCount(value);
     }
 
     const setUpCount = () => {
@@ -34,7 +43,7 @@ export const Counter = () => {
     }
 
     const increment = () => {
-        (Number(count) < Number(maxCount)) && setCount((Number(count) + 1).toString());
+        count < maxCount && setCount(count + 1);
     }
 
     const reset = () => {

@@ -4,31 +4,27 @@ import {InputValue} from "./Components/InputValue";
 import {RootState} from "./store/store";
 import {useAppDispatch, useAppSelector} from "./store/hooks";
 import {WinCount} from "./Components/winCount";
-import {increment, resetCount} from "./store/counterSlice";
+import {increment, incrStartCount, resetCount, incrMaxCount} from './store/counterSlice';
 
-const CounterRtk = () => {
+const CounterReduxToolKit = () => {
 
     const {startCount, maxCount, count} = useAppSelector((state: RootState) => state.counter)
-    console.log(startCount, maxCount, count)
     const dispatch = useAppDispatch()
 
-      // let [valueMax, setValueMax] = useState<string>(maxCount);
-
-    let [disableMax, setDisableMax] = useState<boolean>(true);
-
+   let [disableMax, setDisableMax] = useState<boolean>(true);
 
     const startValue = (value: number) => {
-        // dispatch(value)
+        Number.isInteger(value) &&
+        dispatch(incrStartCount(value))
     }
 
     const maxValue = (value: number) => {
-        // setMaxCount(value);
+        Number.isInteger(value) &&
+        dispatch(incrMaxCount(value))
     }
 
     const setUpCount = () => {
-        // setCount(startCount);
-        // setValueMax(maxCount);
-        // setDisableMax(true)
+        setDisableMax(true)
     }
 
     const incrementBtn = () => {
@@ -41,9 +37,7 @@ const CounterRtk = () => {
     const inputMin = (trust: boolean) => {
         setDisableMax(!trust)
     }
-    const inputMax = (trust: boolean) => {
-        setDisableMax(!trust)
-    }
+
 
     let tryCount = 'enter values and press set';
     let placeCss: string = 'number_enter'
@@ -59,7 +53,6 @@ const CounterRtk = () => {
         errorCss = 'input place_error'
         disableMax = true;
     }
-
 
     return (
 
@@ -91,7 +84,7 @@ const CounterRtk = () => {
                         nameValue={'max value:'}
                         setValue={maxValue}
                         value={maxCount}
-                        inputFocus={inputMax}
+                        inputFocus={inputMin}
                         errorCss={errorCss}
                     />
 
@@ -118,4 +111,4 @@ const CounterRtk = () => {
     );
 };
 
-export default CounterRtk;
+export default CounterReduxToolKit;
