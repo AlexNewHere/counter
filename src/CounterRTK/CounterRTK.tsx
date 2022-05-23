@@ -1,26 +1,26 @@
 import React, {useState} from 'react';
-import {ButtonNew} from "./Components/ButtonNew";
-import {InputValue} from "./Components/InputValue";
-import {RootState} from "./store/store";
-import {useAppDispatch, useAppSelector} from "./store/hooks";
-import {WinCount} from "./Components/winCount";
-import {increment, incrStartCount, resetCount, incrMaxCount} from './store/counterSlice';
+import {ButtonNew} from './Components/ButtonNew';
+import {InputValue} from './Components/InputValue';
+import {RootState} from './store/store';
+import {useAppSelector} from './store/hooks/hooks';
+import {WinCount} from './Components/winCount';
+import {useAction} from './store/hooks/useAction';
 
 const CounterReduxToolKit = () => {
 
     const {startCount, maxCount, count} = useAppSelector((state: RootState) => state.counter)
-    const dispatch = useAppDispatch()
+    const {incrMaxCount, incrStartCount, resetCount, increment} = useAction()
 
-   let [disableMax, setDisableMax] = useState<boolean>(true);
+    let [disableMax, setDisableMax] = useState<boolean>(true);
 
     const startValue = (value: number) => {
         Number.isInteger(value) &&
-        dispatch(incrStartCount(value))
+        incrStartCount(value)
     }
 
     const maxValue = (value: number) => {
         Number.isInteger(value) &&
-        dispatch(incrMaxCount(value))
+        incrMaxCount(value)
     }
 
     const setUpCount = () => {
@@ -28,10 +28,10 @@ const CounterReduxToolKit = () => {
     }
 
     const incrementBtn = () => {
-        count < maxCount && dispatch(increment())
+        count < maxCount && increment()
     }
     const reset = () => {
-       dispatch(resetCount())
+        resetCount()
     }
 
     const inputMin = (trust: boolean) => {
