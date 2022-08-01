@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import {ButtonNew} from './Components/ButtonNew';
 import {InputValue} from './Components/InputValue';
-import {RootState} from './store/store';
 import {useAppSelector} from './store/hooks/hooks';
 import {WinCount} from './Components/winCount';
 import {useAction} from './store/hooks/useAction';
 
 const CounterReduxToolKit = () => {
 
-    const {startCount, maxCount, count} = useAppSelector((state: RootState) => state.counter)
+    const {startCount, maxCount, count} = useAppSelector((state) => state.counter)
     const {incrMaxCount, incrStartCount, resetCount, increment} = useAction()
 
     let [disableMax, setDisableMax] = useState<boolean>(true);
