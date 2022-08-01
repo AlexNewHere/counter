@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/https,://alexnewhere.github.io/counter/static/css/main.43b6c0e1.css",
-    "main.js": "/https,://alexnewhere.github.io/counter/static/js/main.f000f017.js",
-    "static/js/787.28cb0dcd.chunk.js": "/https,://alexnewhere.github.io/counter/static/js/787.28cb0dcd.chunk.js",
-    "index.html": "/https,://alexnewhere.github.io/counter/index.html",
-    "main.43b6c0e1.css.map": "/https,://alexnewhere.github.io/counter/static/css/main.43b6c0e1.css.map",
-    "main.f000f017.js.map": "/https,://alexnewhere.github.io/counter/static/js/main.f000f017.js.map",
-    "787.28cb0dcd.chunk.js.map": "/https,://alexnewhere.github.io/counter/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/counter/static/css/main.43b6c0e1.css",
+    "main.js": "/counter/static/js/main.a61d04fa.js",
+    "static/js/787.28cb0dcd.chunk.js": "/counter/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/counter/index.html",
+    "main.43b6c0e1.css.map": "/counter/static/css/main.43b6c0e1.css.map",
+    "main.a61d04fa.js.map": "/counter/static/js/main.a61d04fa.js.map",
+    "787.28cb0dcd.chunk.js.map": "/counter/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.43b6c0e1.css",
-    "static/js/main.f000f017.js"
+    "static/js/main.a61d04fa.js"
   ]
 }
